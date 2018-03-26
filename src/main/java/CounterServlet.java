@@ -1,18 +1,26 @@
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-@WebServlet(name = "HelloServlet", urlPatterns = "/hello")
-public class HelloWorldServlet extends HttpServlet {
+@WebServlet(name = "CounterServlet", urlPatterns = "/counter")
+
+
+
+public class CounterServlet extends HttpServlet {
+    private int hitCount;
+
+    public void init(){
+        hitCount = 0;
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        hitCount++;
+
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("<h1>Hello, World!</h1>");
+        out.println("<h2>" + " Visitors "  + hitCount + "</h2>");
+
     }
 
 }
-
-
