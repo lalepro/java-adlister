@@ -14,12 +14,10 @@ public class CounterServlet extends HttpServlet {
         hitCount = 0;
     }
 
+@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         hitCount++;
-
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<h2>" + " Visitors "  + hitCount + "</h2>");
+        response.getWriter().println("<h2> Visitors: " + hitCount + "</h2>");
 
     }
 
