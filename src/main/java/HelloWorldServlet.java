@@ -10,3 +10,8 @@ public class HelloWorldServlet extends HttpServlet {
         response.getWriter().println("<h1>Hello, World!</h1>");
     }
 }
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+//        String name = request.getParameter("name");
+//        request.setAttribute("name", name);
+//        request.getRequestDispatcher("/hello.jsp").forward(request, response);
+//    }

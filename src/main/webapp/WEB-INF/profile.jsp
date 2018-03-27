@@ -8,7 +8,8 @@
     </title>
 </head>
 <body>
-<h1>Welcome to the Admins Lounge</h1>
-<h6><em>Keep the party secret!</em></h6>
+<h1>Admin Profile</h1>
+<h5><em>Keep the party secret!</em></h5>
+
 </body>
 </html>
