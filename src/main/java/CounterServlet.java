@@ -16,9 +16,23 @@ public class CounterServlet extends HttpServlet {
 
 @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    response.getWriter().println("<h1>Hello, World!</h1>");
+
+    String restart = request.getParameter("restart");
+    if (restart == null){
         hitCount++;
         response.getWriter().println("<h2> Visitors: " + hitCount + "</h2>");
-
+    } else {
+        hitCount = 0;
+        response.getWriter().println("<h2> Visitors: " + hitCount + "</h2>");
     }
+    }
+//    http://localhost:8080/counter?restart=restart
 
 }
+
+//        hitCount++;
+//    String name = request.getParameter("name");
+//    if (name == null) {
+//        name = "World";
+//    }
