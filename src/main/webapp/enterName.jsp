@@ -18,6 +18,7 @@
     <div class="form-group">
         <label for="username">Enter Name</label>
         <input id="username" name="username" class="form-control" type="text">
+        <button>Submit</button>
     </div>
 </form>
 
