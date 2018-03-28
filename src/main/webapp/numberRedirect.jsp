@@ -16,6 +16,6 @@
 
 <input type="button" value="Try Again" onclick="window.location='enterNumber.jsp'" >
 
-</form>
+
 </body>
 </html>
