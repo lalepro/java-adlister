@@ -12,16 +12,24 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        boolean validAttempt = username.equals("admin") && password.equals("password");
 
         request.setAttribute("password", password);
         request.setAttribute("username", username);
 
-        if(username != null){
-            response.sendRedirect("/index");
-        }
-        else if (username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("password")){
+        if(validAttempt){
             response.sendRedirect("/profile");
         }
+        else {
+            response.sendRedirect("/login");
+        }
+
+//        if(username != null){
+//            response.sendRedirect("/index");
+//        }
+//        else if (username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("password")){
+//
+//        }
 
     }
 

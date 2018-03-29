@@ -26,13 +26,13 @@
     <tbody>
         <c:forEach var="ad" items="${ads}">
             <tr>
-                <th scope="row">${ad.id} </th>
+                <th scope="row">${ad.id}</th>
                 <td>${ad.userId}</td>
                 <td>${ad.title}</td>
                 <td>${ad.description}</td>
                 <td>
-                    <form action="/ads/show" method="get">
-                        <input type="hidden" value="${ad.id}" name="adButton">
+                    <form action="/ads" method="get">
+                        <input type="hidden" value="${ad.id}" name="id">
                         <button  type="submit" >View</button>
                     </form>
                     <%--<a href="/show" >${ads.id}</a>--%>

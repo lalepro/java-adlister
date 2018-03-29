@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "ShowAdServlet", urlPatterns = "/ads/show")
+@WebServlet(name = "ShowAdServlet", urlPatterns = "/show")
 public class ShowAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/show.jsp").forward(request,response);
+//        request.getRequestDispatcher("WEB-INF/show.jsp").forward(request,response);
 
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int adButton = Integer.parseInt(request.getParameter("adButton"));
+        int id = Integer.parseInt(request.getParameter("id"));
 
-        System.out.println(adButton);
+        System.out.println(id);
 
-        Ad ad = DaoFactory.getAdsDao().all().get(adButton - 1);
-        request.setAttribute("adButton", adButton);
-        request.getRequestDispatcher("WEB-INF/show.jsp").forward(request,response);
+        Ad ad = DaoFactory.getAdsDao().all().get(id - 1);
+        request.setAttribute("ad", ad);
+        request.getRequestDispatcher("/ads/show.jsp").forward(request,response);
     }
 }

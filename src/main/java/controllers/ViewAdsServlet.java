@@ -11,15 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ViewAdsServlet", urlPatterns = "/index")
+@WebServlet(name = "ViewAdsServlet", urlPatterns = "/ads")
 public class ViewAdsServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Ad> ads = DaoFactory.getAdsDao().all();
         request.setAttribute("ads", ads);
-        request.getRequestDispatcher("ads/index.jsp").forward(request, response);
+        request.getRequestDispatcher("ads/show.jsp").forward(request, response);
     }
 }
