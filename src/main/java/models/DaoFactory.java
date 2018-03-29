@@ -1,4 +1,4 @@
-import models.Ads;
+package models;
 
 public class DaoFactory {
     private static Ads adsDao;

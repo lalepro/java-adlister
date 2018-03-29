@@ -1,7 +1,4 @@
-
-
-import models.Ad;
-import models.Ads;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;

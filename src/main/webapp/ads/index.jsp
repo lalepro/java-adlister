@@ -8,25 +8,44 @@
 </head>
 <body>
     <jsp:include page="../partials/navbar.jsp" />
-    <div class="container">
+<div class="container">
         <h1>Welcome to the Adlister!</h1>
-<table>
-    <tr>
-        <th>id</th>
-        <th>userID</th>
-        <th>title</th>
-        <th>description</th>
 
+
+<input type="button" value="Log Out" onclick="window.location='/login'" >
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User Id</th>
+        <th>Title</th>
+        <th>Description</th>
     </tr>
+    </thead>
+    <tbody>
         <c:forEach var="ad" items="${ads}">
             <tr>
-                <td>${ad.id}</td>
+                <th scope="row">${ad.id} </th>
                 <td>${ad.userId}</td>
-                <td>${title}</td>
-                <td>${description}</td>
+                <td>${ad.title}</td>
+                <td>${ad.description}</td>
+                <td>
+                    <form action="/ads/show" method="get">
+                        <input type="hidden" value="${ad.id}" name="adButton">
+                        <button  type="submit" >View</button>
+                    </form>
+                    <%--<a href="/show" >${ads.id}</a>--%>
+                </td>
             </tr>
         </c:forEach>
+    </tbody>
 </table>
     </div>
+
+<jsp:include page="../partials/foot.jsp" />
 </body>
 </html>
+
+
+

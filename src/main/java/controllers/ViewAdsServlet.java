@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Ad;
+import models.DaoFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ViewAdsServlet", urlPatterns = "/index.jsp")
+@WebServlet(name = "ViewAdsServlet", urlPatterns = "/index")
 public class ViewAdsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Ad> ads = DaoFactory.getPostDao().all();
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Ad> ads = DaoFactory.getAdsDao().all();
         request.setAttribute("ads", ads);
-        request.getRequestDispatcher("/profile.jsp").forward(request, response);
+        request.getRequestDispatcher("ads/index.jsp").forward(request, response);
     }
 }
