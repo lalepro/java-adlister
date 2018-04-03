@@ -1,12 +1,7 @@
 import com.mysql.cj.jdbc.Driver;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-//import java.sql.DriverManager;
-
-
-
 
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
@@ -18,9 +13,6 @@ public class MySQLAdsDao implements Ads {
                     config.getUrl(),
                     config.getUsername(),
                     config.getPassword()
-
-
-
             );
         } catch (SQLException e){
             e.printStackTrace();
