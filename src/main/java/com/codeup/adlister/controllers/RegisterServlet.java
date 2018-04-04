@@ -21,21 +21,27 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String passwordConfirmation = request.getParameter("passConfirm");
+
         // TODO: ensure the submitted information is valid
-        boolean inputErrors = username.isEmpty() || email.isEmpty() || password.isEmpty();
+        boolean inputErrors = username.isEmpty()
+                || email.isEmpty()
+                || password.isEmpty()
+                || (!passwordConfirmation.equals(passwordConfirmation));
+
         if (inputErrors){
             doGet(request, response);
 
         } else {
+        // TODO: create a new user based off of the submitted information
             User user = new User(0,username, email, password);
             Long id = DaoFactory.getUsersDao().insert(user);
             user.setId(id);
 
+        // TODO: if a user was successfully created, send them to their profile
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
 
         }
-        // TODO: create a new user based off of the submitted information
-        // TODO: if a user was successfully created, send them to their profile
     }
 }
