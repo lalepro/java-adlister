@@ -42,11 +42,11 @@ public class MySQLAdsDao implements Ads {
         stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
         ResultSet rs = stmt.getGeneratedKeys();
         rs.next();
-        return rs.getLong(1);
+        return rs.getLong("1");
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error creating a new ad.", e);
         }
-        return id;
+
     }
 
     private String createInsertQuery(Ad ad){
