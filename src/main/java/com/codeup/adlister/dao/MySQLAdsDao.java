@@ -26,8 +26,9 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> all() {
-        Statement stmt = null;
+
         try {
+            Statement stmt = null;
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
             return createAdsFromResults(rs);
@@ -71,5 +72,22 @@ public class MySQLAdsDao implements Ads {
             ads.add(extractAd(rs));
         }
         return ads;
+    }
+
+//    example of a search preparedStatement
+    public List<Ad> search( String term) {
+        String searchQuery = "SELECT * FROM ads WHERE title LIKE ?";
+        List<Ad> ads = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(searchQuery);
+
+            ps.setString(1, '%' + term + '%');
+
+            ResultSet rs = ps.executeQuery();
+
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
     }
 }
