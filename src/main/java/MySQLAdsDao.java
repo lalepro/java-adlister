@@ -19,38 +19,68 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+//    @Override
+//    public List<Ad> all() {
+//        List<Ad> ads = new ArrayList<>();
+//        try {
+//            Statement stmt = connection.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
+//            while (rs.next()){
+//                ads.add(extractAd(rs));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return ads;
+//    }
+
     @Override
     public List<Ad> all() {
-        List<Ad> ads = new ArrayList<>();
+        Statement stmt = null;
         try {
-            Statement stmt = connection.createStatement();
+            stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
-            while (rs.next()){
-                ads.add(extractAd(rs));
-            }
+            return createAdsFromResults(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error getting all ads", e);
         }
-        return ads;
+
     }
+//
+//    @Override
+//    public Long insert(Ad ad) {
+//        try {
+//        Statement stmt = connection.createStatement();
+//        stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
+//        ResultSet rs = stmt.getGeneratedKeys();
+//            rs.next();
+//            return rs.getLong("1");
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error at insert method", e);
+//        }
+//
+//    }
 
     @Override
     public Long insert(Ad ad) {
-        Long id = (long)0;
+        long id = (long)0;
+        String query = "INSERT INTO ads(title, description, user_id) VALUES ('" + ad.getTitle() + "', '" + ad.getDescription() + "', " + ad.getUserId() +")";
         try {
-        Statement stmt = connection.createStatement();
-        stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
-        ResultSet rs = stmt.getGeneratedKeys();
-        rs.next();
-        return rs.getLong("1");
-        } catch (SQLException e) {
-            throw new RuntimeException("Error creating a new ad.", e);
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                rs.getLong(1);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
         }
-
+        return id;
     }
 
     private String createInsertQuery(Ad ad){
-        return "INSERT INTO ads(user_id, title, description) VALUES (" + ad.getUserId() + " + '" + ad.getTitle() + "' + '" + ad.getDescription() + "')";
+        return "INSERT INTO ads(user_id, title, description) VALUES " +
+                " (" + ad.getUserId() + " + '" + ad.getTitle() + "' + '" + ad.getDescription() + "')";
 
     }
 
@@ -62,4 +92,12 @@ public class MySQLAdsDao implements Ads {
           rs.getString("description")
         );
     }
+
+    private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
+         List<Ad> ads = new ArrayList<>();
+            while (rs.next()) {
+                      ads.add(extractAd(rs));
+                  }
+             return ads;
+            }
 }
