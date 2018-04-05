@@ -1,7 +1,9 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.Config;
 import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
@@ -13,7 +15,7 @@ public class MySQLUsersDao implements Users {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
                 config.getUrl(),
-                config.getUser(),
+                config.getUsername(),
                 config.getPassword()
             );
         } catch (SQLException e) {
@@ -48,6 +50,20 @@ public class MySQLUsersDao implements Users {
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating new user", e);
+        }
+    }
+
+
+
+//    public String hashPassword(String plainTextPassword){
+//        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+//    }
+
+    private void checkPass(String plainPassword, String hashedPassword){
+        if(BCrypt.checkpw(plainPassword, hashedPassword)){
+            System.out.println("The password matches");
+        } else {
+            System.out.println("The password does not match.");
         }
     }
 
