@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-
+//TODO: 2 Change you login logic to check against users' hashed passwords.
         boolean passwordsDoMatch = BCrypt.checkpw(password, user.getPassword());
 
 

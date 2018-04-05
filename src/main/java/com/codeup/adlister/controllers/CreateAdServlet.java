@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//   TODO:     Don't allow ad creation unless a user is logged in.
+//   TODO:    3 Don't allow ad creation unless a user is logged in.
         if(request.getSession().getAttribute("user") == null){
           response.sendRedirect("/login");
           return;
@@ -24,11 +24,9 @@ public class CreateAdServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-//TODO:        Don't allow ad creation unless a user is logged in.= check to see if they have a session
+//TODO:       3 Don't allow ad creation unless a user is logged in.= check to see if they have a session
         User user = (User)request.getSession().getAttribute("user");
-
-// TODO:       When a new ad is created, assign the user id of the logged in user to the ad.
+// TODO:      4 When a new ad is created, assign the user id of the logged in user to the ad.
         Ad ad = new Ad(
                     user.getId(),
                     request.getParameter("title"),
