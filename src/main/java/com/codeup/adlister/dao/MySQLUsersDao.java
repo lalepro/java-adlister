@@ -55,9 +55,9 @@ public class MySQLUsersDao implements Users {
 
 
 
-//    public String hashPassword(String plainTextPassword){
-//        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
-//    }
+    public String hashPassword(String plainTextPassword){
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
 
     private void checkPass(String plainPassword, String hashedPassword){
         if(BCrypt.checkpw(plainPassword, hashedPassword)){
