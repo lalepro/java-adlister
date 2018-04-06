@@ -1,5 +1,7 @@
 package com.codeup.adlister.models;
 
+import com.codeup.adlister.util.Password;
+
 public class User {
     private long id;
     private String username;
@@ -48,8 +50,9 @@ public class User {
     public String getPassword() {
         return password;
     }
-
+//TODO: HASHING PASSWORD IN THE USER MODEL. ALTERNATIVELY THE REGISTER SERVLET OR THE DOA
     public void setPassword(String password) {
-        this.password = password;
+
+        this.password = Password.hash(password);
     }
 }

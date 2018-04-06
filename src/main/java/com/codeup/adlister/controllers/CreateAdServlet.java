@@ -15,7 +15,7 @@ import java.io.IOException;
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //   TODO:    3 Don't allow ad creation unless a user is logged in.
-        if(request.getSession().getAttribute("user") == null){
+        if(request.getSession().getAttribute("user") == null) {
           response.sendRedirect("/login");
           return;
       }

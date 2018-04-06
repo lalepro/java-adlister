@@ -33,7 +33,8 @@ public class LoginServlet extends HttpServlet {
 
 //TODO: 2 Change you login logic to check against users' hashed passwords.
         boolean passwordsDoMatch = BCrypt.checkpw(password, user.getPassword());
-
+//CASTS PASSWORD UTIL WITH PASSWORD.CHECK METHOD
+//        Boolean passwordsDoMatch = Password.check(password, user.getPassword());
 
         if (passwordsDoMatch) {
             request.getSession().setAttribute("user", user);
